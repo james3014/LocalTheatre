@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<LocalTheatre.Models.ExpandedUserRoles>
+﻿@model PagedList.IPagedList<LocalTheatre.Models.ExpandedUser>
 @using PagedList.Mvc
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -10,7 +10,7 @@
 
 <br />
 <p>
-    @Html.ActionLink("Create Role", "Create", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Create User", "Create", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Edit Role", "ViewAllRoles", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Home", "../", "Home", null, new { @class = "btn btn-default" })
 </p>

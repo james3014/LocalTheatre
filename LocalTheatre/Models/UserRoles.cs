@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LocalTheatre.Models
 {
-    public class ExpandedUserRoles
+    public class ExpandedUser
     {
         [Key]
         [Display(Name = "User Name")]
