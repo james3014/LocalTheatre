@@ -346,7 +346,7 @@ namespace LocalTheatre.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult AddRole(RoleDTO role)
+        #region public ActionResult AddRole(Role role)
         public ActionResult AddRole(Role role)
         {
             try
@@ -412,7 +412,7 @@ namespace LocalTheatre.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult EditRoles(UserAndRolesDTO userAndRoles)
+        #region public ActionResult EditRoles(UserAndRoles userAndRoles)
         public ActionResult EditRole(UserAndRoles userAndRoles)
         {
             try
@@ -539,9 +539,9 @@ namespace LocalTheatre.Controllers
                 username = username.ToLower();
 
                 // Check that we have an actual user
-                ExpandedUser objExpandedUserDTO = GetUser(username);
+                ExpandedUser objExpandedUser = GetUser(username);
 
-                if (objExpandedUserDTO == null)
+                if (objExpandedUser == null)
                 {
                     return HttpNotFound();
                 }
@@ -569,10 +569,10 @@ namespace LocalTheatre.Controllers
 
                 ViewBag.AddRole = new SelectList(RolesUserIsNotIn(username));
 
-                UserAndRoles objUserAndRolesDTO =
+                UserAndRoles objUserAndRoles =
                     GetUserAndRoles(username);
 
-                return View("EditRoles", objUserAndRolesDTO);
+                return View("EditRoles", objUserAndRoles);
             }
         }
         #endregion
@@ -726,7 +726,7 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        #region private UserAndRolesDTO GetUserAndRoles(string username)
+        #region private UserAndRoles GetUserAndRoles(string username)
         private UserAndRoles GetUserAndRoles(string username)
         {
             // Go get the user
@@ -751,7 +751,7 @@ namespace LocalTheatre.Controllers
             UserAndRoles userAndRoles = new UserAndRoles();
 
             userAndRoles.UserName = username;
-            userAndRoles.ColUserRoleDTO = colUserRole;
+            userAndRoles.ColUserRole = colUserRole;
             return userAndRoles;
         }
         #endregion
@@ -795,6 +795,25 @@ namespace LocalTheatre.Controllers
             if (result == null)
             {
                 throw new Exception("Could not find the user");
+            }
+
+            // Try to create new user object ** Doesn't work currently **
+            try
+            {
+                result = new ExpandedUser
+                {
+                    Email = expandedUser.Email,
+                    UserName = expandedUser.UserName,
+                    LockoutEndDate = expandedUser.LockoutEndDate,
+                    AccessFailedCount = expandedUser.AccessFailedCount,
+                    PhoneNumber = expandedUser.PhoneNumber,
+                    IsSuspended = true,
+                    Roles = expandedUser.Roles
+                };
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Error: " + ex);
             }
 
             UserManager.SetLockoutEndDate(result.Id, DateTime.Now.AddDays(7));

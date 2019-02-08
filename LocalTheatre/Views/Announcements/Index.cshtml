@@ -1,0 +1,31 @@
+﻿@model IEnumerable<LocalTheatre.Models.Announcements>
+
+@{
+    ViewBag.Title = "Announcements";
+}
+
+<style>
+    .fakeimg {
+        height: 200px;
+        background: #aaa;
+    }
+</style>
+
+<div class="col-lg-10" style="margin-top:15px">
+    <button type="button" class="btn btn-default">@Html.ActionLink("Create New Post", "Create")</button>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-10">
+        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+        <h5>@Html.DisplayFor(modelItem => item.Author)</h5>
+        <div class="fakeimg">Fake Image</div>
+        <p>@Html.DisplayFor(modelItem => item.Announcement)</p>
+        <p>@Html.DisplayFor(modelItem => item.Date)</p>
+        @Html.ActionLink("Delete Post", "Delete", new { @id = item.AnnouncementId, @class = "btn btn-default" })
+        @Html.ActionLink("Edit Post", "Edit", new { @id = item.AnnouncementId, @class = "btn btn-default" })
+        <hr />
+
+    </div>
+}

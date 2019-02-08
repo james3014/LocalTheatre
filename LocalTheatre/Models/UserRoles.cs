@@ -23,6 +23,8 @@ namespace LocalTheatre.Models
 
         public string PhoneNumber { get; set; }
 
+        public bool IsSuspended { get; set; }
+
         public IEnumerable<UserRoles> Roles { get; set; }
     }
 
@@ -56,7 +58,7 @@ namespace LocalTheatre.Models
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
-        public List<UserRole> ColUserRoleDTO { get; set; }
+        public List<UserRole> ColUserRole { get; set; }
     }
 }
 

@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AnnouncementsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -194,8 +195,21 @@
     <Compile Include="Migrations\201902081812005_IdentityModelDbContext.Designer.cs">
       <DependentUpon>201902081812005_IdentityModelDbContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902081954109_AnnouncementsModel.cs" />
+    <Compile Include="Migrations\201902081954109_AnnouncementsModel.Designer.cs">
+      <DependentUpon>201902081954109_AnnouncementsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902082038044_RoleModelsUpdated.cs" />
+    <Compile Include="Migrations\201902082038044_RoleModelsUpdated.Designer.cs">
+      <DependentUpon>201902082038044_RoleModelsUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902082050100_RoleUpdatedWithList.cs" />
+    <Compile Include="Migrations\201902082050100_RoleUpdatedWithList.Designer.cs">
+      <DependentUpon>201902082050100_RoleUpdatedWithList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Announcements.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -266,6 +280,10 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditRole.cshtml" />
+    <Content Include="Views\Announcements\Create.cshtml" />
+    <Content Include="Views\Announcements\Delete.cshtml" />
+    <Content Include="Views\Announcements\Edit.cshtml" />
+    <Content Include="Views\Announcements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -289,6 +307,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902081812005_IdentityModelDbContext.resx">
       <DependentUpon>201902081812005_IdentityModelDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081954109_AnnouncementsModel.resx">
+      <DependentUpon>201902081954109_AnnouncementsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902082038044_RoleModelsUpdated.resx">
+      <DependentUpon>201902082038044_RoleModelsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902082050100_RoleUpdatedWithList.resx">
+      <DependentUpon>201902082050100_RoleUpdatedWithList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

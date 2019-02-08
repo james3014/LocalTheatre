@@ -14,7 +14,8 @@
     <div>
         @Html.ActionLink("Back", "EditUser", new { UserName = Model.UserName }, new { @class = "btn btn-default" })
         <input type="submit" value="Add Role" class="btn btn-default" />
-        @Html.DropDownList("AddRole")
+        <hr />
+        <div class="dropdown">@Html.DropDownList("AddRole")</div>
     </div>
     <br />
 
@@ -24,7 +25,7 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model.ColUserRoleDTO)
+        @foreach (var item in Model.ColUserRole)
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
