@@ -65,6 +65,16 @@ namespace LocalTheatre.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(50)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +89,7 @@ namespace LocalTheatre.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
     }
 
     public class ResetPasswordViewModel

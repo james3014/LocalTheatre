@@ -190,8 +190,13 @@
     <Compile Include="Migrations\201902081019034_RolesModelAdded.Designer.cs">
       <DependentUpon>201902081019034_RolesModelAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902081812005_IdentityModelDbContext.cs" />
+    <Compile Include="Migrations\201902081812005_IdentityModelDbContext.Designer.cs">
+      <DependentUpon>201902081812005_IdentityModelDbContext.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserRoles.cs" />
@@ -281,6 +286,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902081019034_RolesModelAdded.resx">
       <DependentUpon>201902081019034_RolesModelAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081812005_IdentityModelDbContext.resx">
+      <DependentUpon>201902081812005_IdentityModelDbContext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

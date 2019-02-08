@@ -10,9 +10,8 @@
 
 <br />
 <p>
-    @Html.ActionLink("Create User", "Create", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Create Role", "AddRole", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Edit Role", "ViewAllRoles", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Delete Role", "ViewAllRoles", null, new { @class = "btn btn-default" })
 </p>
 <br />
 @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
@@ -51,9 +50,15 @@
                 @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
                 {
                     @Html.ActionLink("Delete", "DeleteUser", new { UserName = item.UserName },
-                    new { onclick = "return confirm('Are you sure you wish to delete this user?');" })
+                    new { onclick = "return confirm('Are you sure you wish to delete this user?');" }) 
+                } |
+
+                @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
+                {
+                    @Html.ActionLink("Suspend", "SuspendUser", new { UserName = item.UserName },
+                   new { onclick = "return confirm('Are you sure you wish to suspend this user?');" })
                 }
-            </td>
+                </td>
         </tr>
     }
 

@@ -264,6 +264,47 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        // SUSPEND: Admin/SuspendUser
+        [Authorize(Roles = "Administrator")]
+        #region public ActionResult SuspendUser(string username)
+        public ActionResult SuspendUser(string username)
+        {
+            try
+            {
+                if (username == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (username.ToLower() == this.User.Identity.Name.ToLower())
+                {
+                    ModelState.AddModelError(string.Empty, "Error: Cannot suspend the current user");
+
+                    return View("Index");
+                }
+
+                ExpandedUser expandedUser = GetUser(username);
+
+                if(expandedUser == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    SuspendUser(expandedUser);
+                }
+
+                return Redirect("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Error: " + ex);
+
+                return View("~/Admin", GetUser(username));
+            }
+        }
+        #endregion
+
 
 
 
@@ -742,6 +783,24 @@ namespace LocalTheatre.Controllers
             }
 
             return colRolesUserIsNotIn;
+        }
+        #endregion
+
+        #region private ExpandedUser SuspendUser(ExpandedUser expandedUser)
+        private ExpandedUser SuspendUser(ExpandedUser expandedUser)
+        {
+            ApplicationUser result = UserManager.FindByName(expandedUser.UserName);
+
+            // If we can't find the user, throw an exception
+            if (result == null)
+            {
+                throw new Exception("Could not find the user");
+            }
+
+            UserManager.SetLockoutEndDate(result.Id, DateTime.Now.AddDays(7));
+            UserManager.Update(result);
+
+            return (expandedUser);
         }
         #endregion
     }
