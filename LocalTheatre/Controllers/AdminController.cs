@@ -33,7 +33,7 @@ namespace LocalTheatre.Controllers
                 {
                     intPage = 1;
                 }
-                else;
+                else
                 {
                     if (currentFilter != null)
                     {
@@ -48,13 +48,15 @@ namespace LocalTheatre.Controllers
                 }
 
                 ViewBag.CurrentFilter = searchStringUserNameOrEmail;
+
                 List<ExpandedUser> col_User = new List<ExpandedUser>();
                 int intSkip = (intPage - 1) * intPageSize;
-                intTotalPageCount = _userManager.Users
+
+                intTotalPageCount = UserManager.Users
                     .Where(x => x.UserName.Contains(searchStringUserNameOrEmail))
                     .Count();
 
-                var result = _userManager.Users
+                var result = UserManager.Users
                     .Where(x => x.UserName.Contains(searchStringUserNameOrEmail))
                     .OrderBy(x => x.UserName)
                     .Skip(intSkip)
@@ -63,10 +65,13 @@ namespace LocalTheatre.Controllers
 
                 foreach (var item in result)
                 {
-                    ExpandedUser objUsers = new ExpandedUser();
-                    objUsers.UserName = item.UserName;
-                    objUsers.Email = item.Email;
-                    objUsers.LockoutEndDate = item.LockoutEndDateUtc;
+                    ExpandedUser objUsers = new ExpandedUser
+                    {
+                        UserName = item.UserName,
+                        Email = item.Email,
+                        LockoutEndDate = item.LockoutEndDateUtc
+                    };
+
                     col_User.Add(objUsers);
                 }
 
@@ -95,8 +100,10 @@ namespace LocalTheatre.Controllers
         public ActionResult Create()
         {
             ExpandedUser objRoles = new ExpandedUser();
+
             ViewBag.Roles = GetAllRolesAsSelectList();
-            return View();
+
+            return View(objRoles);
         }
         #endregion
 
@@ -105,18 +112,20 @@ namespace LocalTheatre.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region public ActionResult Create(ExpandedUserRoles roles)
-        public ActionResult Create(ExpandedUser roles)
+        public ActionResult Create(ExpandedUser expandedUser)
         {
             try
             {
-                if (roles == null)
+                if (expandedUser == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                var email = roles.Email.Trim();
-                var userName = roles.UserName.Trim();
-                var password = roles.Password.Trim();
+                var email = expandedUser.Email.Trim();
+                var password = expandedUser.Password.Trim();
+
+                // Username is lower case of email
+                var userName = email.ToLower();
 
                 if (email == "")
                 {
@@ -128,12 +137,9 @@ namespace LocalTheatre.Controllers
                     throw new Exception("No Password");
                 }
 
-                // userName is lower case of email
-                userName = email.ToLower();
-
                 // Create User
-                var objNewAdminUser = new ApplicationUser { UserName = userName, Email = email, };
-                var AdminUserCreateResult = _userManager.Create(objNewAdminUser, password);
+                ApplicationUser objNewAdminUser = new ApplicationUser { UserName = userName, Email = email };
+                IdentityResult AdminUserCreateResult = UserManager.Create(objNewAdminUser, password);
 
                 if (AdminUserCreateResult.Succeeded == true)
                 {
@@ -142,7 +148,7 @@ namespace LocalTheatre.Controllers
                     if (strNewRole != "0")
                     {
                         // Put user in role
-                        _userManager.AddToRole(objNewAdminUser.Id, strNewRole);
+                        UserManager.AddToRole(objNewAdminUser.Id, strNewRole);
                     }
 
                     return Redirect("~/Admin");
@@ -152,7 +158,7 @@ namespace LocalTheatre.Controllers
                     ViewBag.Roles = GetAllRolesAsSelectList();
                     ModelState.AddModelError(string.Empty, "Error: Failed to create the user. Check password requirements.");
 
-                    return View(roles);
+                    return View(expandedUser);
                 }
             }
             catch (Exception ex)
@@ -274,8 +280,8 @@ namespace LocalTheatre.Controllers
                     new RoleStore<IdentityRole>(new ApplicationDbContext())
                     );
 
-            List<RoleDTO> colRole = (from objRole in roleManager.Roles
-                                     select new RoleDTO
+            List<Role> colRole = (from objRole in roleManager.Roles
+                                     select new Role
                                      {
                                          Id = objRole.Id,
                                          RoleName = objRole.Name
@@ -290,7 +296,7 @@ namespace LocalTheatre.Controllers
         #region public ActionResult AddRole()
         public ActionResult AddRole()
         {
-            RoleDTO objRole = new RoleDTO();
+            Role objRole = new Role();
             return View(objRole);
         }
         #endregion
@@ -300,7 +306,7 @@ namespace LocalTheatre.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region public ActionResult AddRole(RoleDTO role)
-        public ActionResult AddRole(RoleDTO role)
+        public ActionResult AddRole(Role role)
         {
             try
             {
@@ -340,23 +346,22 @@ namespace LocalTheatre.Controllers
         // GET: /Admin/EditRoles
         [Authorize(Roles = "Administrator")]
         #region public ActionResult EditRoles(string username)
-        public ActionResult EditRoles(string username)
+        public ActionResult EditRole(string username)
         {
             if (username == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            username = username.ToLower();
-
             // Check that we have an actual user
-            ExpandedUser expandedUser = new ExpandedUser();
+            ExpandedUser expandedUser = GetUser(username);
+
             if (expandedUser == null)
             {
                 return HttpNotFound();
             }
 
-            UserAndRolesDTO userAndRoles = GetUserAndRoles(username);
+            UserAndRoles userAndRoles = GetUserAndRoles(username);
 
             return View(userAndRoles);
         }
@@ -367,7 +372,7 @@ namespace LocalTheatre.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region public ActionResult EditRoles(UserAndRolesDTO userAndRoles)
-        public ActionResult EditRoles(UserAndRolesDTO userAndRoles)
+        public ActionResult EditRole(UserAndRoles userAndRoles)
         {
             try
             {
@@ -382,22 +387,22 @@ namespace LocalTheatre.Controllers
                 if (newRole != "No Roles Found")
                 {
                     // Go get the user
-                    ApplicationUser user = _userManager.FindByName(username);
+                    ApplicationUser applicationUser = UserManager.FindByName(username);
 
                     // Put user in role
-                    _userManager.AddToRole(user.Id, newRole);
+                    UserManager.AddToRole(applicationUser.Id, newRole);
                 }
 
                 ViewBag.AddRole = new SelectList(RolesUserIsNotIn(username));
 
-                UserAndRolesDTO allRoles = GetUserAndRoles(username);
+                UserAndRoles allRoles = GetUserAndRoles(username);
 
                 return View(allRoles);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Error: " + ex);
-                return View("EditRoles");
+                return View("EditRole");
             }
         }
         #endregion
@@ -448,8 +453,8 @@ namespace LocalTheatre.Controllers
                         );
                 }
 
-                List<RoleDTO> colRole = (from objRole in RoleManager.Roles
-                                         select new RoleDTO
+                List<Role> colRole = (from objRole in RoleManager.Roles
+                                         select new Role
                                          {
                                              Id = objRole.Id,
                                              RoleName = objRole.Name
@@ -465,8 +470,8 @@ namespace LocalTheatre.Controllers
                     new RoleManager<IdentityRole>(
                         new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-                List<RoleDTO> colRole = (from objRole in roleManager.Roles
-                                         select new RoleDTO
+                List<Role> colRole = (from objRole in roleManager.Roles
+                                         select new Role
                                          {
                                              Id = objRole.Id,
                                              RoleName = objRole.Name
@@ -508,10 +513,10 @@ namespace LocalTheatre.Controllers
                 }
 
                 // Go get the User
-                ApplicationUser user = _userManager.FindByName(username);
+                ApplicationUser user = UserManager.FindByName(username);
                 // Remove User from role
-                _userManager.RemoveFromRoles(user.Id, RoleName);
-                _userManager.Update(user);
+                UserManager.RemoveFromRoles(user.Id, RoleName);
+                UserManager.Update(user);
 
                 ViewBag.AddRole = new SelectList(RolesUserIsNotIn(username));
 
@@ -523,7 +528,7 @@ namespace LocalTheatre.Controllers
 
                 ViewBag.AddRole = new SelectList(RolesUserIsNotIn(username));
 
-                UserAndRolesDTO objUserAndRolesDTO =
+                UserAndRoles objUserAndRolesDTO =
                     GetUserAndRoles(username);
 
                 return View("EditRoles", objUserAndRolesDTO);
@@ -552,12 +557,28 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        #region public ApplicationUserManager UserManager
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ??
+                    HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        #endregion
+
         #region private ExpandedUser GetUser(string username)
         private ExpandedUser GetUser(string username)
         {
             ExpandedUser expandedUser = new ExpandedUser();
 
-            var result = _userManager.FindByName(username);
+            var result = UserManager.FindByName(username);
 
             // If we could not find the user, throw an exception
             if (result == null) throw new Exception("Could not find the user");
@@ -607,7 +628,7 @@ namespace LocalTheatre.Controllers
         #region private ExpandedUser UpdateUser(ExpandedUser expandedUser)
         private ExpandedUser UpdateUser(ExpandedUser expandedUser)
         {
-            ApplicationUser result = _userManager.FindByName(expandedUser.UserName);
+            ApplicationUser result = UserManager.FindByName(expandedUser.UserName);
 
             // If the user is not found throw exception
             if (result == null)
@@ -618,23 +639,23 @@ namespace LocalTheatre.Controllers
             result.Email = expandedUser.Email;
 
             // Check if account is locked
-            if (_userManager.IsLockedOut(result.Id))
+            if (UserManager.IsLockedOut(result.Id))
             {
                 // Unlock user
-                _userManager.ResetAccessFailedCountAsync(result.Id);
+                UserManager.ResetAccessFailedCountAsync(result.Id);
             }
 
-            _userManager.Update(result);
+            UserManager.Update(result);
 
             // Was a password sent
             if (!string.IsNullOrEmpty(expandedUser.Password))
             {
                 // Remove current password
-                var removePassword = _userManager.RemovePassword(result.Id);
+                var removePassword = UserManager.RemovePassword(result.Id);
 
                 if (removePassword.Succeeded)
                 {
-                    var addPassword = _userManager.AddPassword(result.Id, expandedUser.Password);
+                    var addPassword = UserManager.AddPassword(result.Id, expandedUser.Password);
 
                     if (addPassword.Errors.Count() > 0)
                     {
@@ -650,7 +671,7 @@ namespace LocalTheatre.Controllers
         #region private void DeleteUser(ExpandedUser expandedUser)
         private void DeleteUser(ExpandedUser expandedUser)
         {
-            ApplicationUser user = _userManager.FindByName(expandedUser.UserName);
+            ApplicationUser user = UserManager.FindByName(expandedUser.UserName);
 
             // If user cannot be found, throw an exception
             if (user == null)
@@ -658,21 +679,21 @@ namespace LocalTheatre.Controllers
                 throw new Exception("Could not find the user");
             }
 
-            _userManager.RemoveFromRoles(user.Id, _userManager.GetRoles(user.Id).ToArray());
-            _userManager.Update(user);
-            _userManager.Delete(user);
+            UserManager.RemoveFromRoles(user.Id, UserManager.GetRoles(user.Id).ToArray());
+            UserManager.Update(user);
+            UserManager.Delete(user);
         }
         #endregion
 
         #region private UserAndRolesDTO GetUserAndRoles(string username)
-        private UserAndRolesDTO GetUserAndRoles(string username)
+        private UserAndRoles GetUserAndRoles(string username)
         {
             // Go get the user
-            ApplicationUser user = _userManager.FindByName(username);
+            ApplicationUser user = UserManager.FindByName(username);
 
-            List<UserRoleDTO> colUserRole = 
-                (from objRole in _userManager.GetRoles(user.Id)
-                 select new UserRoleDTO
+            List<UserRole> colUserRole = 
+                (from objRole in UserManager.GetRoles(user.Id)
+                 select new UserRole
                  {
                     RoleName = objRole,
                     UserName = username
@@ -680,13 +701,13 @@ namespace LocalTheatre.Controllers
 
             if (colUserRole.Count() == 0)
             {
-                colUserRole.Add(new UserRoleDTO { RoleName = "No Roles Found" });
+                colUserRole.Add(new UserRole { RoleName = "No Roles Found" });
             }
 
             ViewBag.AddRole = new SelectList(RolesUserIsNotIn(username));
 
             // Create UserRolesAndPermissions
-            UserAndRolesDTO userAndRoles = new UserAndRolesDTO();
+            UserAndRoles userAndRoles = new UserAndRoles();
 
             userAndRoles.UserName = username;
             userAndRoles.ColUserRoleDTO = colUserRole;
@@ -698,10 +719,10 @@ namespace LocalTheatre.Controllers
         private List<string> RolesUserIsNotIn(string username)
         {
             // Get roles the user is not in
-            var colAllRoles = _roleManager.Roles.Select(x => x.Name).ToList();
+            var colAllRoles = RoleManager.Roles.Select(x => x.Name).ToList();
 
             // Get the roles for an individual
-            ApplicationUser user = _userManager.FindByName(username);
+            ApplicationUser user = UserManager.FindByName(username);
 
             // If we could not find the user, throw an exception
             if (user == null)
@@ -709,7 +730,7 @@ namespace LocalTheatre.Controllers
                 throw new Exception("Could not find the user");
             }
 
-            var colRolesForUser = _userManager.GetRoles(user.Id).ToList();
+            var colRolesForUser = UserManager.GetRoles(user.Id).ToList();
 
             var colRolesUserIsNotIn = (from objRole in colAllRoles
                                        where !colRolesForUser.Contains(objRole)

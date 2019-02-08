@@ -1,4 +1,4 @@
-﻿@model LocalTheatre.Models.UserAndRolesDTO
+﻿@model LocalTheatre.Models.UserAndRoles
 
 @{
     Layout = "~/views/Shared/_Layout.cshtml";
@@ -32,6 +32,7 @@
                     @if (!(Model.UserName.ToLower() == this.User.Identity.Name.ToLower()) && item.RoleName == "Administrator" && item.RoleName != "No Roles Found")
                     {
                         @Html.ActionLink("Delete", "DeleteRole", new { UserName = item.UserName, RoleName = item.RoleName }, new { onclick = "return confirm('Are you sure you wish to delete this role?');"})
+
                     }
                 </td>
             </tr>

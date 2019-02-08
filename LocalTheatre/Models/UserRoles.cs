@@ -26,7 +26,6 @@ namespace LocalTheatre.Models
         public IEnumerable<UserRoles> Roles { get; set; }
     }
 
-
     public class UserRoles
     {
         [Key]
@@ -34,7 +33,7 @@ namespace LocalTheatre.Models
         public string RoleName { get; set; }
     }
 
-    public class UserRoleDTO
+    public class UserRole
     {
         [Key]
         [Display(Name = "User Name")]
@@ -43,7 +42,7 @@ namespace LocalTheatre.Models
         public string RoleName { get; set; }
     }
 
-    public class RoleDTO
+    public class Role
     {
         [Key]
         public string Id { get; set; }
@@ -51,13 +50,13 @@ namespace LocalTheatre.Models
         public string RoleName { get; set; }
     }
 
-    public class UserAndRolesDTO
+    public class UserAndRoles
     {
         [Key]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
-        public List<UserRoleDTO> ColUserRoleDTO { get; set; }
+        public List<UserRole> ColUserRoleDTO { get; set; }
     }
 }
 
