@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnnouncementsController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,10 +208,23 @@
     <Compile Include="Migrations\201902082050100_RoleUpdatedWithList.Designer.cs">
       <DependentUpon>201902082050100_RoleUpdatedWithList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902111443148_UpdatedAnnouncementModel.cs" />
+    <Compile Include="Migrations\201902111443148_UpdatedAnnouncementModel.Designer.cs">
+      <DependentUpon>201902111443148_UpdatedAnnouncementModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902111537456_AddedCommentsModel.cs" />
+    <Compile Include="Migrations\201902111537456_AddedCommentsModel.Designer.cs">
+      <DependentUpon>201902111537456_AddedCommentsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902111554534_UpdatedCommentsModel.cs" />
+    <Compile Include="Migrations\201902111554534_UpdatedCommentsModel.Designer.cs">
+      <DependentUpon>201902111554534_UpdatedCommentsModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcements.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserRoles.cs" />
@@ -284,6 +298,10 @@
     <Content Include="Views\Announcements\Delete.cshtml" />
     <Content Include="Views\Announcements\Edit.cshtml" />
     <Content Include="Views\Announcements\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -316,6 +334,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902082050100_RoleUpdatedWithList.resx">
       <DependentUpon>201902082050100_RoleUpdatedWithList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902111443148_UpdatedAnnouncementModel.resx">
+      <DependentUpon>201902111443148_UpdatedAnnouncementModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902111537456_AddedCommentsModel.resx">
+      <DependentUpon>201902111537456_AddedCommentsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902111554534_UpdatedCommentsModel.resx">
+      <DependentUpon>201902111554534_UpdatedCommentsModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -21,5 +21,7 @@ namespace LocalTheatre.Models
         public System.Data.Entity.DbSet<LocalTheatre.Models.ExpandedUser> ExpandedUsers { get; set; }
 
         public System.Data.Entity.DbSet<LocalTheatre.Models.Announcements> Announcements { get; set; }
+
+        public System.Data.Entity.DbSet<LocalTheatre.Models.Comments> Comments { get; set; }
     }
 }

@@ -6,114 +6,121 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using LocalTheatre.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LocalTheatre.Controllers
 {
-    public class AnnouncementsController : Controller
+    public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Announcements
+        // GET: Comments
         public ActionResult Index()
         {
-            return View(db.Announcements.ToList());
+            return View(db.Comments.ToList());
         }
 
-        // GET: Announcements/Create
+        // GET: Comments/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Comments comments = db.Comments.Find(id);
+
+            if (comments == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comments);
+        }
+
+        // GET: Comments/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Announcements/Create
+        // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AnnouncementId,Title,Announcement,Date,Category,Author,Comments")] Announcements announcements)
+        public ActionResult Create([Bind(Include = "CommentId,CommentBody,CommentDate,CommentAuthor,AnnouncementId")] Comments comments)
         {
-            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
-
-
             if (ModelState.IsValid)
             {
-                Announcements announce = new Announcements
+                Comments newComment = new Comments
                 {
-                    Title = announcements.Title,
-                    Announcement = announcements.Announcement,
-                    Date = DateTime.Now,
-                    Category = announcements.Category,
-                    Author = user.FirstName + " " + user.Surname
-                    
-                    
+                    CommentTitle = comments.CommentTitle,
+                    CommentBody = comments.CommentBody,
+                    CommentDate = DateTime.Now,
+                    CommentAuthor = comments.CommentAuthor
                 };
 
-                db.Announcements.Add(announce);
+                db.Comments.Add(comments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(announcements);
+            return View(comments);
         }
 
-        // GET: Announcements/Edit/5
+        // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Announcements announcements = db.Announcements.Find(id);
-            if (announcements == null)
+            Comments comments = db.Comments.Find(id);
+            if (comments == null)
             {
                 return HttpNotFound();
             }
-            return View(announcements);
+            return View(comments);
         }
 
-        // POST: Announcements/Edit/5
+        // POST: Comments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AnnouncementId,Title,Announcement,Date,Category,Author")] Announcements announcements)
+        public ActionResult Edit([Bind(Include = "CommentId,CommentBody,CommentDate,CommentAuthor,AnnouncementId")] Comments comments)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(announcements).State = EntityState.Modified;
+                db.Entry(comments).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(announcements);
+            return View(comments);
         }
 
-        // GET: Announcements/Delete/5
+        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Announcements announcements = db.Announcements.Find(id);
-            if (announcements == null)
+            Comments comments = db.Comments.Find(id);
+            if (comments == null)
             {
                 return HttpNotFound();
             }
-            return View(announcements);
+            return View(comments);
         }
 
-        // POST: Announcements/Delete/5
+        // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Announcements announcements = db.Announcements.Find(id);
-            db.Announcements.Remove(announcements);
+            Comments comments = db.Comments.Find(id);
+            db.Comments.Remove(comments);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

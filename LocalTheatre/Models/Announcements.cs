@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LocalTheatre.Models
 {
@@ -20,11 +21,30 @@ namespace LocalTheatre.Models
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
 
-        [Required]
-        [Display(Name = "Category")]
-        public string Category { get; set; }
-
         [Display(Name = "Author")]
         public string Author { get; set; }
+
+        public virtual ICollection<Comments> Comments { get; set; }
+
+        [Required]
+        [Display(Name = "Category")]
+        public Category Category { get; set; }
+
+
+        public static IEnumerable<SelectListItem> GetCategory()
+        {
+            yield return new SelectListItem { Text = "Announcement", Value = "Announcement" };
+            yield return new SelectListItem { Text = "Event", Value = "Event" };
+            yield return new SelectListItem { Text = "Review", Value = "Review" };
+        }
     }
+
+    public enum Category
+    {
+        Announcement,
+        Event,
+        Review
+    }
+
+
 }
