@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201902111554534_UpdatedCommentsModel.Designer.cs">
       <DependentUpon>201902111554534_UpdatedCommentsModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902132114510_CommentModelFixed.cs" />
+    <Compile Include="Migrations\201902132114510_CommentModelFixed.Designer.cs">
+      <DependentUpon>201902132114510_CommentModelFixed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcements.cs" />
@@ -343,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902111554534_UpdatedCommentsModel.resx">
       <DependentUpon>201902111554534_UpdatedCommentsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902132114510_CommentModelFixed.resx">
+      <DependentUpon>201902132114510_CommentModelFixed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

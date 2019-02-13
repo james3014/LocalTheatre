@@ -54,7 +54,6 @@ namespace LocalTheatre.Controllers
             {
                 Comments newComment = new Comments
                 {
-                    CommentTitle = comments.CommentTitle,
                     CommentBody = comments.CommentBody,
                     CommentDate = DateTime.Now,
                     CommentAuthor = comments.CommentAuthor

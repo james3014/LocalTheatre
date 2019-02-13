@@ -11,9 +11,7 @@ namespace LocalTheatre.Models
         [Key]
         public int CommentId { get; set; }
 
-        [Required]
-        [Display(Name = "Title")]
-        public string CommentTitle { get; set; }
+        public string CommentAuthor { get; set; }
 
         [Required(ErrorMessage = "Please enter a comment")]
         [Display(Name = "Content")]
@@ -22,8 +20,6 @@ namespace LocalTheatre.Models
         [DataType(DataType.DateTime)]
         [Display(Name = "Date")]
         public DateTime CommentDate { get; set; }
-
-        public string CommentAuthor { get; set; }
 
         public int AnnouncementId { get; set; }
 
