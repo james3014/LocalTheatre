@@ -8,11 +8,7 @@
     ViewBag.Title = "User Roles";
 }
 
-<br />
-<p>
-    @Html.ActionLink("Create Role", "AddRole", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Delete Role", "ViewAllRoles", null, new { @class = "btn btn-default" })
-</p>
+
 <br />
 @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
 {

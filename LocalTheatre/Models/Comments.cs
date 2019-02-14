@@ -16,7 +16,7 @@ namespace LocalTheatre.Models
         public virtual ApplicationUser User { get; set; }
 
         [Required(ErrorMessage = "Enter a comment")]
-        [Display(Name = " User Comment")]
+        [Display(Name = " Comment")]
         [MaxLength(50)]
         public string CommentBody { get; set; }
 

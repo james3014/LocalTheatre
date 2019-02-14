@@ -26,7 +26,7 @@
         <div class="fakeimg">Fake Image</div>
         <p>@Html.DisplayFor(modelItem => item.Announcement)</p>
         <p>@Html.DisplayFor(modelItem => item.Date)</p>
-        @Html.ActionLink("View Announcement", "ViewAnnouncement", new { id = item.AnnouncementId }, null)
+        @Html.ActionLink("View Post", "ViewAnnouncement", new { id = item.AnnouncementId }, null)
         <hr />
 
     </div>

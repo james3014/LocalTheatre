@@ -2,7 +2,7 @@
 @using Microsoft.AspNet.Identity
 @model LocalTheatre.ViewModels.DisplayViewModel
 @{
-    ViewBag.Title = "ViewAnnouncement";
+    ViewBag.Title = "View Post";
 }
 
 <style>
@@ -42,5 +42,14 @@
 }
 else
 {
-    <p>There are no comments yet - be the first to comment</p>
+    <p>No comments yet!</p>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Add Comment", "Create", "Comments", new { AnnouncementId = Model.AnnouncementId }, null)
+}
+else
+{
+    @Html.ActionLink("Register", "Register", "Account")
 }
