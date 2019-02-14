@@ -13,7 +13,10 @@
 
 <div class="col-lg-10" style="margin-top:15px">
     <button type="button" class="btn btn-default">@Html.ActionLink("Create New Post", "Create")</button>
+    <hr />
 </div>
+
+
 
 @foreach (var item in Model)
 {
@@ -23,9 +26,7 @@
         <div class="fakeimg">Fake Image</div>
         <p>@Html.DisplayFor(modelItem => item.Announcement)</p>
         <p>@Html.DisplayFor(modelItem => item.Date)</p>
-        @Html.ActionLink("Delete Post", "Delete", new { @id = item.AnnouncementId, @class = "btn btn-default" })
-        @Html.ActionLink("Edit Post", "Edit", new { @id = item.AnnouncementId, @class = "btn btn-default" })
-        @Html.ActionLink("Leave Comment", "Create", "Comments", new { @id = item.AnnouncementId }, null)
+        @Html.ActionLink("View Announcement", "ViewAnnouncement", new { id = item.AnnouncementId }, null)
         <hr />
 
     </div>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using LocalTheatre.Models;
+using LocalTheatre.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -21,6 +22,18 @@ namespace LocalTheatre.Controllers
         public ActionResult Index()
         {
             return View(db.Announcements.ToList());
+        }
+
+        // GET: ViewAnnouncements
+        public ActionResult ViewAnnouncement(int id)
+        {
+            DisplayViewModel model = new DisplayViewModel();
+
+            model.Announcements = db.Announcements.Find(id);
+            model.Announcements.Comments.OrderByDescending(comment => comment.CommentDate);
+            model.AnnouncementId = id;
+
+            return View(model);
         }
 
         // GET: Announcements/Create
@@ -48,9 +61,7 @@ namespace LocalTheatre.Controllers
                     Announcement = announcements.Announcement,
                     Date = DateTime.Now,
                     Category = announcements.Category,
-                    Author = user.FirstName + " " + user.Surname
-                    
-                    
+                    Author = user.FirstName + " " + user.Surname 
                 };
 
                 db.Announcements.Add(announce);

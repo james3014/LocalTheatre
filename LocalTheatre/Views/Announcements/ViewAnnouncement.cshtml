@@ -1,0 +1,46 @@
+﻿@using LocalTheatre.Models
+@using Microsoft.AspNet.Identity
+@model LocalTheatre.ViewModels.DisplayViewModel
+@{
+    ViewBag.Title = "ViewAnnouncement";
+}
+
+<style>
+    .fakeimg {
+        height: 200px;
+        background: #aaa;
+    }
+</style>
+
+
+<a href="javascript:void(0);" class="btn btn-default" onclick="history.go(-1);">Back</a></p>
+
+<h1>@Model.Announcements.Title</h1>
+<h3>@Model.Announcements.Author</h3>
+<div class="fakeimg">Fake Image</div>
+<p>@Model.Announcements.Announcement</p>
+<p>@Model.Announcements.Date.ToShortDateString()</p>
+
+<h3>Comments</h3>
+@if (Model.Announcements.Comments.Count > 0)
+{
+    foreach (var comment in Model.Announcements.Comments)
+    {
+        <div class="comment">
+            <p>@comment.CommentBody</p>
+            <p>Posted by <strong> @comment.CommentAuthor</strong> on @comment.CommentDate.ToString("D") at @comment.CommentDate.ToShortTimeString()</p>
+
+            @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
+            {
+                @Html.ActionLink("Remove", "Delete", "Comments", new { id = comment.CommentId }, null)
+
+
+            }
+        </div>
+        <hr />
+    }
+}
+else
+{
+    <p>There are no comments yet - be the first to comment</p>
+}

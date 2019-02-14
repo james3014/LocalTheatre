@@ -23,6 +23,7 @@ namespace LocalTheatre.Models
 
         [Display(Name = "Author")]
         public string Author { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Comments> Comments { get; set; }
 

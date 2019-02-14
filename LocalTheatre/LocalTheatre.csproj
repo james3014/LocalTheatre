@@ -224,6 +224,14 @@
     <Compile Include="Migrations\201902132114510_CommentModelFixed.Designer.cs">
       <DependentUpon>201902132114510_CommentModelFixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902141137162_CommentModelCompleted.cs" />
+    <Compile Include="Migrations\201902141137162_CommentModelCompleted.Designer.cs">
+      <DependentUpon>201902141137162_CommentModelCompleted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902141231348_CommentModelAlteredNames.cs" />
+    <Compile Include="Migrations\201902141231348_CommentModelAlteredNames.Designer.cs">
+      <DependentUpon>201902141231348_CommentModelAlteredNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcements.cs" />
@@ -234,6 +242,7 @@
     <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\DisplayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -306,6 +315,7 @@
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Announcements\ViewAnnouncement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,6 +360,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902132114510_CommentModelFixed.resx">
       <DependentUpon>201902132114510_CommentModelFixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902141137162_CommentModelCompleted.resx">
+      <DependentUpon>201902141137162_CommentModelCompleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902141231348_CommentModelAlteredNames.resx">
+      <DependentUpon>201902141231348_CommentModelAlteredNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

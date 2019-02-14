@@ -51,18 +51,14 @@ namespace LocalTheatre.Controllers
         public ActionResult Create([Bind(Include = "CommentId,CommentBody,CommentDate,CommentAuthor,AnnouncementId")] Comments comments)
         {
             if (ModelState.IsValid)
-            {
-                Comments newComment = new Comments
-                {
-                    CommentBody = comments.CommentBody,
-                    CommentDate = DateTime.Now,
-                    CommentAuthor = comments.CommentAuthor
-                };
-
+            { 
                 db.Comments.Add(comments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            
+            
 
             return View(comments);
         }
