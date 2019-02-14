@@ -19,8 +19,10 @@ namespace LocalTheatre.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Announcements
-        public ActionResult Index()
+        public ActionResult Index(string searchAnnouncements)
         {
+            ViewBag.SearchKey = searchAnnouncements;
+
             return View(db.Announcements.ToList());
         }
 

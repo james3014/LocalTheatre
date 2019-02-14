@@ -69,7 +69,6 @@ namespace LocalTheatre.Controllers
                     {
                         UserName = item.UserName,
                         Email = item.Email,
-                        LockoutEndDate = item.LockoutEndDateUtc
                     };
 
                     col_User.Add(objUsers);
@@ -626,9 +625,6 @@ namespace LocalTheatre.Controllers
 
             expandedUser.UserName = result.UserName;
             expandedUser.Email = result.Email;
-            expandedUser.LockoutEndDate = result.LockoutEndDateUtc;
-            expandedUser.AccessFailedCount = result.AccessFailedCount;
-            expandedUser.PhoneNumber = result.PhoneNumber;
 
             return expandedUser;
         }
@@ -789,10 +785,10 @@ namespace LocalTheatre.Controllers
         #region private ExpandedUser SuspendUser(ExpandedUser expandedUser)
         private ExpandedUser SuspendUser(ExpandedUser expandedUser)
         {
-            ApplicationUser result = UserManager.FindByName(expandedUser.UserName);
+            ApplicationUser user = UserManager.FindByName(expandedUser.UserName);
 
             // If we can't find the user, throw an exception
-            if (result == null)
+            if (user == null)
             {
                 throw new Exception("Could not find the user");
             }
@@ -800,24 +796,15 @@ namespace LocalTheatre.Controllers
             // Try to create new user object ** Doesn't work currently **
             try
             {
-                result = new ExpandedUser
-                {
-                    Email = expandedUser.Email,
-                    UserName = expandedUser.UserName,
-                    LockoutEndDate = expandedUser.LockoutEndDate,
-                    AccessFailedCount = expandedUser.AccessFailedCount,
-                    PhoneNumber = expandedUser.PhoneNumber,
-                    IsSuspended = true,
-                    Roles = expandedUser.Roles
-                };
+                UserManager.AddToRole(user.Id, "Suspended");
+                UserManager.RemoveFromRole(user.Id, "User");
+
+                expandedUser.IsSuspended = true;
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Error: " + ex);
             }
-
-            UserManager.SetLockoutEndDate(result.Id, DateTime.Now.AddDays(7));
-            UserManager.Update(result);
 
             return (expandedUser);
         }

@@ -16,13 +16,6 @@ namespace LocalTheatre.Models
 
         public string Password { get; set; }
 
-        [Display(Name = "Lockout End Date")]
-        public DateTime? LockoutEndDate { get; set; }
-
-        public int AccessFailedCount { get; set; }
-
-        public string PhoneNumber { get; set; }
-
         public bool IsSuspended { get; set; }
 
         public IEnumerable<UserRoles> Roles { get; set; }
