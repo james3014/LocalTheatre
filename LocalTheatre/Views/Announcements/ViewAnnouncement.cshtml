@@ -6,20 +6,36 @@
 }
 
 <style>
-    .fakeimg {
-        height: 200px;
+    .wrapper > div {
         background: #aaa;
+        padding: 1em;
+    }
+
+    .wrapper {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-column-gap: 1em;
+        grid-row-gap: 1em;
+    }
+
+    .fakeimg {
+        width: 25em;
+        height: 15em;
+        border: solid;
+        background: #4cff00;
     }
 </style>
 
 
 <a href="javascript:void(0);" class="btn btn-default" onclick="history.go(-1);">Back</a></p>
 
-<h1>@Model.Announcements.Title</h1>
-<h3>@Model.Announcements.Author</h3>
-<div class="fakeimg">Fake Image</div>
-<p>@Model.Announcements.Announcement</p>
-<p>@Model.Announcements.Date.ToShortDateString()</p>
+<div class="wrapper">
+    <h1>@Model.Announcements.Title</h1>
+    <h3>@Model.Announcements.Author</h3>
+    <p>@Model.Announcements.Announcement</p>
+    <p>@Model.Announcements.Date.ToShortDateString()</p>
+</div>
+
 
 <h3>Comments</h3>
 @if (Model.Announcements.Comments.Count > 0)
@@ -47,9 +63,9 @@ else
 
 @if (User.Identity.IsAuthenticated)
 {
-    @Html.ActionLink("Add Comment", "Create", "Comments", new { AnnouncementId = Model.AnnouncementId }, null)
+    @Html.ActionLink("Add Comment", "Create", "Comments", new { AnnouncementId = Model.AnnouncementId }, new { @class = "btn btn-danger" })
 }
 else
 {
-    @Html.ActionLink("Register", "Register", "Account")
+    @Html.ActionLink("Register", "Register", "Account", new { @class = "btn btn-danger" })
 }
