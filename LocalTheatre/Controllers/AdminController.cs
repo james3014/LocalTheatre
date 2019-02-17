@@ -809,5 +809,35 @@ namespace LocalTheatre.Controllers
             return (expandedUser);
         }
         #endregion
+
+        #region private ExpandedUser UnsuspendUser(ExpandedUser expandedUser)
+        private ExpandedUser UnsuspendUser(ExpandedUser expandedUser)
+        {
+            ApplicationUser user = UserManager.FindByName(expandedUser.UserName);
+
+            // If we can't find the user, throw an exception
+            if (user == null)
+            {
+                throw new Exception("Could not find the user");
+            }
+
+            // Try to create new user object ** Doesn't work currently **
+            try
+            {
+                UserManager.AddToRole(user.Id, "User");
+                UserManager.RemoveFromRole(user.Id, "Suspended");
+
+                expandedUser.IsSuspended = false;
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Error: " + ex);
+            }
+
+            return (expandedUser);
+        }
+        #endregion
     }
+
+
 }

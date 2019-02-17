@@ -4,45 +4,24 @@
     ViewBag.Title = "Announcements";
 }
 
-<style>
-    .wrapper > div{
-        background:#aaa;
-        padding: 1em;
-    }
-
-    .wrapper{
-        display:grid;
-        grid-template-columns: 70% 30%;
-        grid-column-gap: 1em;
-        grid-row-gap: 1em;
-    }
-
-
-    .fakeimg {
-        width: 25em;
-        height: 15em;
-        border:solid;
-        background: #4cff00;
-    }
-</style>
-
-<br />
+<div class="container">
+        <img src="~/Resources/Local_Theatre_Company_Logo.jpg" width="682" height="221" alt="Local Theatre Logo" style="width:60%" class="text-center"/>
+</div>
 
 
 @foreach (var item in Model)
 {
-<div class="wrapper">
-    <div>
-        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-        <h3>By - @Html.DisplayFor(modelItem => item.Author)</h3>
-        <p>@Html.DisplayFor(modelItem => item.Announcement)</p>
-        <p>@Html.DisplayFor(modelItem => item.Date)</p>
-        @Html.ActionLink("View Post", "ViewAnnouncement", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
-    </div>
-</div>
-        
-            
-
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 center-block">
+                <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                <h3>By - @Html.DisplayFor(modelItem => item.Author)</h3>
+                <p>@Html.DisplayFor(modelItem => item.Announcement)</p>
+                <p>@Html.DisplayFor(modelItem => item.Date)</p>
+                @Html.ActionLink("View Post", "ViewAnnouncement", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+     </div>
 }
 
 
