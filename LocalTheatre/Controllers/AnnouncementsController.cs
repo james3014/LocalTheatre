@@ -20,9 +20,7 @@ namespace LocalTheatre.Controllers
 
         // GET: Announcements
         public ActionResult Index(string searchAnnouncements)
-        {
-            ViewBag.SearchKey = searchAnnouncements;
-
+        { 
             return View(db.Announcements.ToList());
         }
 
