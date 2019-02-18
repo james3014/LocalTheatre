@@ -171,7 +171,7 @@ namespace LocalTheatre.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Announcements");
                 }
                 AddErrors(result);
             }
@@ -400,7 +400,7 @@ namespace LocalTheatre.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Announcements");
         }
 
         //
@@ -457,7 +457,7 @@ namespace LocalTheatre.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Announcements");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

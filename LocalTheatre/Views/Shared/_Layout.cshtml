@@ -22,13 +22,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li style="margin-top:10px; margin-right:10px">
-                        @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
-                        {
+
                             <div class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" aria-label="Search">
-                                <button class="btn btn-danger" type="submit">Search Posts</button>
+                                <form action="/Announcements/Search" method="get">
+                                    <input class="form-control mr-sm-2" type="search" aria-label="Search" name="q">
+                                    <button class="btn btn-danger" type="submit">Search Posts</button>
+                                </form>
+                                
+                                
                             </div>
                         }
+
                     </li>
                     <li>@Html.ActionLink("Home", "Index", "Announcements", null, new { @style = "color: #ffffff" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", null, new { @style = "color: #ffffff" })</li>
@@ -61,3 +65,5 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+

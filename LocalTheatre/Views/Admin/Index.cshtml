@@ -59,9 +59,5 @@
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model,
-    page => Url.Action("Index",
-    new { page,
-        searchStringUserNameOrEmail = ViewBag.searchStringUserNameOrEmail,
-        currentFilter = ViewBag.CurrentFilter }))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page,searchStringUserNameOrEmail = ViewBag.searchStringUserNameOrEmail, currentFilter = ViewBag.CurrentFilter }))
 <hr />
