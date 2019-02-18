@@ -22,14 +22,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li style="margin-top:10px; margin-right:10px">
-
+                        
+                        @using (Html.BeginForm("Index", "Announcements", FormMethod.Get))
+                        {
                             <div class="form-inline my-2 my-lg-0">
-                                <form action="/Announcements/Search" method="get">
-                                    <input class="form-control mr-sm-2" type="search" aria-label="Search" name="q">
-                                    <button class="btn btn-danger" type="submit">Search Posts</button>
-                                </form>
-                                
-                                
+                                <input class="form-control mr-sm-2" type="search" aria-label="Search">
+                                <button class="btn btn-danger" type="submit">Search Posts</button>
                             </div>
                         }
 

@@ -57,9 +57,6 @@ namespace LocalTheatre.Controllers
                 return RedirectToAction("Index");
             }
 
-            
-            
-
             return View(comments);
         }
 

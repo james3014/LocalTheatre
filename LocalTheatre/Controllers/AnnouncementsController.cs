@@ -18,11 +18,10 @@ namespace LocalTheatre.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        private string searchAnnouncement = "";
-
         // GET: Announcements
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string id)
         {
+
             return View(db.Announcements.ToList()); 
         }
 
@@ -139,25 +138,6 @@ namespace LocalTheatre.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult Search(string q)
-        {
-
-            var result = from a in db.Announcements
-                         select a;
-
-            if (!string.IsNullOrEmpty(q))
-            {
-                result = result.Where(s => s.Title.Contains(q));
-
-                return View(result.ToList());
-            }
-            else
-            {
-                return View(result.ToList());
-            }
-        }
-
     }
 
 

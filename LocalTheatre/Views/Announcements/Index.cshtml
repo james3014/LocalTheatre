@@ -6,7 +6,12 @@
     ViewBag.Title = "Announcements";
 }
 
-<h2>Articles</h2>
+<h2>Articles</h2> @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
+{
+    @Html.ActionLink("Add Post", "Create", null, new { @class = "btn btn-danger" })
+}
+
+
 <hr />
 
 <div class="row">
@@ -21,20 +26,20 @@
                 <p>Comments <span class="badge badge-danger">@item.Comments.Count</span> </p>
                 <p>
                     @Html.ActionLink("View Post", "ViewAnnouncement", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
-                @Html.ActionLink("Leave Comment", "Create", "Comments", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Leave Comment", "Create", "Comments", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
 
-                @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
-                {
-                    @Html.ActionLink("Edit Post", "Edit", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
-                }
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
+                    {
+                        @Html.ActionLink("Edit Post", "Edit", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
+                    }
 
-                @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
-                {
-                    @Html.ActionLink("Delete Post", "Delete", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
-                }
-            </p>
-        </div>
-    }
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
+                    {
+                        @Html.ActionLink("Delete Post", "Delete", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
+                    }
+                </p>
+            </div>
+        }
 
     </div>
     <div class="rightcolumn">
