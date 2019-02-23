@@ -26,7 +26,6 @@
                 <p>Comments <span class="badge badge-danger">@item.Comments.Count</span> </p>
                 <p>
                     @Html.ActionLink("View Post", "ViewAnnouncement", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Leave Comment", "Create", "Comments", new { id = item.AnnouncementId }, new { @class = "btn btn-danger" })
 
                     @if (User.IsInRole("Administrator") || User.IsInRole("Staff"))
                     {
