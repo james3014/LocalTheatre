@@ -2,7 +2,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav-item" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
 
@@ -12,7 +12,7 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="navbar navbar-nav">
         <li>@Html.ActionLink("Register", "Register", "Account", null, new { id = "registerLink", @style = "color: #ffffff" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", null, new { id = "loginLink", @style = "color: #ffffff" })</li>
     </ul>

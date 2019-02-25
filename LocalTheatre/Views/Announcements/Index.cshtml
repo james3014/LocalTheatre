@@ -20,7 +20,7 @@
         {
             <div class="card">
                 <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
-                <h5><span class="badge badge-pill">@item.Category</span> - @item.Date.ToShortDateString()</h5>
+                <h5><span class="badge badge-secondary">@item.Category</span> - @item.Date.ToShortDateString()</h5>
 
                 <p>@item.Announcement</p>
                 <p>Comments <span class="badge badge-danger">@item.Comments.Count</span> </p>
