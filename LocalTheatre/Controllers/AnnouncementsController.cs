@@ -14,6 +14,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LocalTheatre.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AnnouncementsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -38,6 +41,7 @@ namespace LocalTheatre.Controllers
         }
 
         // GET: Announcements/Create
+        [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +50,7 @@ namespace LocalTheatre.Controllers
         // POST: Announcements/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator, Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AnnouncementId,Title,Announcement,Date,Category,Author,Comments")] Announcements announcements)
@@ -74,6 +79,7 @@ namespace LocalTheatre.Controllers
         }
 
         // GET: Announcements/Edit/5
+        [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +97,7 @@ namespace LocalTheatre.Controllers
         // POST: Announcements/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator, Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "AnnouncementId,Title,Announcement,Date,Category,Author")] Announcements announcements)
@@ -105,6 +112,7 @@ namespace LocalTheatre.Controllers
         }
 
         // GET: Announcements/Delete/5
+        [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,7 +127,8 @@ namespace LocalTheatre.Controllers
             return View(announcements);
         }
 
-        // POST: Announcements/Delete/5
+        // POST: Announcements/Delete/5#
+        [Authorize(Roles = "Administrator, Staff")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

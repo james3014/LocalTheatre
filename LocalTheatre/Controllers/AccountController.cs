@@ -20,16 +20,25 @@ namespace LocalTheatre.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public AccountController()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -42,6 +51,9 @@ namespace LocalTheatre.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get

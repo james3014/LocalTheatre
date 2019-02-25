@@ -5,6 +5,9 @@ using Microsoft.Owin.Security;
 
 namespace LocalTheatre.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
@@ -14,17 +17,26 @@ namespace LocalTheatre.Models
         public bool BrowserRemembered { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
         public IList<AuthenticationDescription> OtherLogins { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class FactorViewModel
     {
         public string Purpose { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class SetPasswordViewModel
     {
         [Required]
@@ -39,6 +51,9 @@ namespace LocalTheatre.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class ChangePasswordViewModel
     {
         [Required]
@@ -58,6 +73,9 @@ namespace LocalTheatre.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class AddPhoneNumberViewModel
     {
         [Required]
@@ -66,6 +84,9 @@ namespace LocalTheatre.Models
         public string Number { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class VerifyPhoneNumberViewModel
     {
         [Required]
@@ -78,6 +99,9 @@ namespace LocalTheatre.Models
         public string PhoneNumber { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class ConfigureTwoFactorViewModel
     {
         public string SelectedProvider { get; set; }

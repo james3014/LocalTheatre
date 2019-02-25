@@ -6,6 +6,9 @@ using System.Web;
 
 namespace LocalTheatre.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Comments
     {
         [Key]
@@ -24,6 +27,9 @@ namespace LocalTheatre.Models
         [Display(Name = "Date Added")]
         public DateTime CommentDate { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Comments()
         {
             CommentDate = DateTime.Now;

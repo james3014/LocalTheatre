@@ -8,6 +8,9 @@ using System.Web.Mvc;
 
 namespace LocalTheatre.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Announcements
     {
         [Key]
@@ -32,7 +35,9 @@ namespace LocalTheatre.Models
         [Display(Name = "Category")]
         public Category Category { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public static IEnumerable<SelectListItem> GetCategory()
         {
             yield return new SelectListItem { Text = "Announcement", Value = "Announcement" };
@@ -41,6 +46,9 @@ namespace LocalTheatre.Models
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public enum Category
     {
         Announcement,

@@ -10,6 +10,9 @@ using LocalTheatre.Models;
 
 namespace LocalTheatre.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Authorize]
     public class ManageController : Controller
     {

@@ -6,6 +6,9 @@ using System.Web;
 
 namespace LocalTheatre.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

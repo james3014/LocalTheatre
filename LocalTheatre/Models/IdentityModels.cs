@@ -8,7 +8,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LocalTheatre.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    /// <summary>
+    /// 
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         [Required(ErrorMessage = "Enter a first name")]
@@ -17,6 +19,9 @@ namespace LocalTheatre.Models
         [Required(ErrorMessage = "Enter a surname")]
         public string Surname { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -25,6 +30,9 @@ namespace LocalTheatre.Models
             return userIdentity;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator ApplicationUser(ExpandedUser v)
         {
             throw new NotImplementedException();

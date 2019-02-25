@@ -6,6 +6,9 @@ using System.Web;
 
 namespace LocalTheatre.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExpandedUser
     {
         [Key]
@@ -21,6 +24,9 @@ namespace LocalTheatre.Models
         public IEnumerable<UserRoles> Roles { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class UserRoles
     {
         [Key]
@@ -28,6 +34,9 @@ namespace LocalTheatre.Models
         public string RoleName { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class UserRole
     {
         [Key]
@@ -37,6 +46,9 @@ namespace LocalTheatre.Models
         public string RoleName { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Role
     {
         [Key]
@@ -45,6 +57,9 @@ namespace LocalTheatre.Models
         public string RoleName { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class UserAndRoles
     {
         [Key]
