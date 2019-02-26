@@ -92,7 +92,10 @@ namespace LocalTheatre.Controllers
 
         // User Management *****************************
 
-        // GET: Admin/Create
+        /// <summary>
+        /// GET: Admin/Create
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult Create()
         public ActionResult Create()
@@ -105,7 +108,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // POST: Admin/Create
+
+        /// <summary>
+        /// POST: Admin/Create
+        /// </summary>
+        /// <param name="expandedUser"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -169,7 +177,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // GET: Admin/Edit
+
+        /// <summary>
+        /// GET: Admin/Edit
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult Edit(string username)
         public ActionResult EditUser(string username)
@@ -190,7 +203,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // POST: Admin/Edit/
+
+        /// <summary>
+        /// POST: Admin/Edit/
+        /// </summary>
+        /// <param name="allUserRoles"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -221,7 +239,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // GET: Admin/Delete/
+
+        /// <summary>
+        /// GET: Admin/Delete/
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult DeleteUser(string username)
         public ActionResult DeleteUser(string username)
@@ -262,7 +285,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // SUSPEND: Admin/SuspendUser
+
+        /// <summary>
+        /// SUSPEND: Admin/SuspendUser
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult SuspendUser(string username)
         public ActionResult SuspendUser(string username)
@@ -308,7 +336,11 @@ namespace LocalTheatre.Controllers
 
         // Role Management *****************************
 
-        // GET: /Admin/ViewAllRoles
+
+        /// <summary>
+        /// GET: /Admin/ViewAllRoles
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult ViewAllRoles()
         public ActionResult ViewAllRoles()
@@ -330,7 +362,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // GET: /Admin/AddRole
+
+        /// <summary>
+        /// GET: /Admin/AddRole
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult AddRole()
         public ActionResult AddRole()
@@ -340,7 +376,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // POST: /Admin/AddRole
+
+        /// <summary>
+        /// POST: /Admin/AddRole
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -382,7 +423,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // GET: /Admin/EditRoles
+
+        /// <summary>
+        /// GET: /Admin/EditRoles
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult EditRoles(string username)
         public ActionResult EditRole(string username)
@@ -406,7 +452,12 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
-        // POST: / Admin/EditRoles
+
+        /// <summary>
+        /// POST: / Admin/EditRoles
+        /// </summary>
+        /// <param name="userAndRoles"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -447,7 +498,11 @@ namespace LocalTheatre.Controllers
         #endregion
 
 
-        // DELETE: /Admin/DeleteUserRole?RoleName=TestRole
+        /// <summary>
+        /// DELETE: /Admin/DeleteUserRole?RoleName=TestRole
+        /// </summary>
+        /// <param name="RoleName"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult DeleteUserRole(string RoleName)
         public ActionResult DeleteUserRole(string RoleName)
@@ -522,7 +577,12 @@ namespace LocalTheatre.Controllers
         #endregion
 
 
-        // DELETE: /Admin/DeleteUserRole?UserName="TestUser&&RoleName="Administrator"
+        /// <summary>
+        /// DELETE: /Admin/DeleteUserRole?UserName="TestUser&&RoleName="Administrator"
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="RoleName"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         #region public ActionResult DeleteRole(string username, string roleName
         public ActionResult DeleteRole(string username, string RoleName)
@@ -580,6 +640,9 @@ namespace LocalTheatre.Controllers
 
         // Utility Functions *****************************
 
+        /// <summary>
+        /// Getter and setter for RoleManager
+        /// </summary>
         #region public ApplicationRoleManager RoleManager
         public ApplicationRoleManager RoleManager
         {
@@ -596,6 +659,9 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Getter and setter for UserManager
+        /// </summary>
         #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
         {
@@ -612,6 +678,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Finds a user from their username and creates a new ExpandedUser object
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         #region private ExpandedUser GetUser(string username)
         private ExpandedUser GetUser(string username)
         {
@@ -629,6 +700,10 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Returns a list of all currently created roles 
+        /// </summary>
+        /// <returns></returns>
         #region private List GetAllRolesAsSelectList()
         private List<SelectListItem> GetAllRolesAsSelectList()
         {
@@ -661,6 +736,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Allows the admin to edit any user other than the "Admin" account 
+        /// </summary>
+        /// <param name="expandedUser"></param>
+        /// <returns></returns>
         #region private ExpandedUser UpdateUser(ExpandedUser expandedUser)
         private ExpandedUser UpdateUser(ExpandedUser expandedUser)
         {
@@ -704,6 +784,10 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Allows the admin to delete any user other than the "Admin" account
+        /// </summary>
+        /// <param name="expandedUser"></param>
         #region private void DeleteUser(ExpandedUser expandedUser)
         private void DeleteUser(ExpandedUser expandedUser)
         {
@@ -721,6 +805,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Returns a list of all users and their current roles
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         #region private UserAndRoles GetUserAndRoles(string username)
         private UserAndRoles GetUserAndRoles(string username)
         {
@@ -751,6 +840,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Returns all roles a selected user does not currently have
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         #region private List<string> RolesUserIsNotIn(string username)
         private List<string> RolesUserIsNotIn(string username)
         {
@@ -781,6 +875,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Suspends a selected user from being able to create a new comment on any announcement
+        /// </summary>
+        /// <param name="expandedUser"></param>
+        /// <returns></returns>
         #region private ExpandedUser SuspendUser(ExpandedUser expandedUser)
         private ExpandedUser SuspendUser(ExpandedUser expandedUser)
         {
@@ -809,6 +908,11 @@ namespace LocalTheatre.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Unsuspends a selected user and allows them the ability to post on announcements
+        /// </summary>
+        /// <param name="expandedUser"></param>
+        /// <returns></returns>
         #region private ExpandedUser UnsuspendUser(ExpandedUser expandedUser)
         private ExpandedUser UnsuspendUser(ExpandedUser expandedUser)
         {

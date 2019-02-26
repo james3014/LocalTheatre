@@ -10,21 +10,26 @@ using LocalTheatre.Models;
 
 namespace LocalTheatre.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Comments
+        /// <summary>
+        /// GET: Comments
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Index()
         {
             return View(db.Comments.ToList());
         }
 
-        // GET: Comments/Details/5
+
+        /// <summary>
+        /// GET: Comments/Details/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Details(int? id)
         {
@@ -42,16 +47,23 @@ namespace LocalTheatre.Controllers
             return View(comments);
         }
 
-        // GET: Comments/Create
+
+        /// <summary>
+        /// GET: Comments/Create
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff, User")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Comments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// POST: Comments/Create
+        /// </summary>
+        /// <param name="comments"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff, User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +79,12 @@ namespace LocalTheatre.Controllers
             return View(comments);
         }
 
-        // GET: Comments/Edit/5
+
+        /// <summary>
+        /// GET: Comments/Edit/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Edit(int? id)
         {
@@ -83,9 +100,12 @@ namespace LocalTheatre.Controllers
             return View(comments);
         }
 
-        // POST: Comments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// POST: Comments/Edit/5
+        /// </summary>
+        /// <param name="comments"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,7 +120,12 @@ namespace LocalTheatre.Controllers
             return View(comments);
         }
 
-        // GET: Comments/Delete/5
+
+        /// <summary>
+        /// GET: Comments/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Delete(int? id)
         {
@@ -116,7 +141,12 @@ namespace LocalTheatre.Controllers
             return View(comments);
         }
 
-        // POST: Comments/Delete/5
+
+        /// <summary>
+        /// POST: Comments/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

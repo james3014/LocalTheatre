@@ -8,9 +8,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LocalTheatre.Models
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         [Required(ErrorMessage = "Enter a first name")]
@@ -19,9 +16,7 @@ namespace LocalTheatre.Models
         [Required(ErrorMessage = "Enter a surname")]
         public string Surname { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -30,9 +25,6 @@ namespace LocalTheatre.Models
             return userIdentity;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public static implicit operator ApplicationUser(ExpandedUser v)
         {
             throw new NotImplementedException();

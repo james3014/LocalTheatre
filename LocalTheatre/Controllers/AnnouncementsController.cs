@@ -14,21 +14,28 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LocalTheatre.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class AnnouncementsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Announcements
+        /// <summary>
+        /// GET: Announcements
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Index(string id)
         {
 
             return View(db.Announcements.ToList()); 
         }
 
-        // GET: ViewAnnouncements
+
+        /// <summary>
+        /// GET: ViewAnnouncements
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ViewAnnouncement(int id)
         {
             DisplayViewModel model = new DisplayViewModel();
@@ -40,16 +47,23 @@ namespace LocalTheatre.Controllers
             return View(model);
         }
 
-        // GET: Announcements/Create
+
+        /// <summary>
+        /// GET: Announcements/Create
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Announcements/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// POST: Announcements/Create
+        /// </summary>
+        /// <param name="announcements"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -78,7 +92,12 @@ namespace LocalTheatre.Controllers
             return View(announcements);
         }
 
-        // GET: Announcements/Edit/5
+
+        /// <summary>
+        /// GET: Announcements/Edit/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Edit(int? id)
         {
@@ -94,9 +113,11 @@ namespace LocalTheatre.Controllers
             return View(announcements);
         }
 
-        // POST: Announcements/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Announcements/Edit/5
+        /// </summary>
+        /// <param name="announcements"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -111,7 +132,12 @@ namespace LocalTheatre.Controllers
             return View(announcements);
         }
 
-        // GET: Announcements/Delete/5
+
+        /// <summary>
+        /// GET: Announcements/Delete/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         public ActionResult Delete(int? id)
         {
@@ -127,7 +153,12 @@ namespace LocalTheatre.Controllers
             return View(announcements);
         }
 
-        // POST: Announcements/Delete/5#
+
+        /// <summary>
+        /// POST: Announcements/Delete/5#
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Staff")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

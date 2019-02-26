@@ -6,9 +6,7 @@ using System.Web;
 
 namespace LocalTheatre.Models
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class Comments
     {
         [Key]
@@ -28,7 +26,7 @@ namespace LocalTheatre.Models
         public DateTime CommentDate { get; set; }
 
         /// <summary>
-        /// 
+        /// Initialised CommentDate as the current date and time
         /// </summary>
         public Comments()
         {

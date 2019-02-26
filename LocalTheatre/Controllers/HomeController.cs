@@ -6,27 +6,23 @@ using System.Web.Mvc;
 
 namespace LocalTheatre.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        /// <summary>
+        /// Returns the "About" view from the Home controller
+        /// </summary>
+        /// <returns></returns>
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
+        /// <summary>
+        /// Returns the "Contact" view from the Home controller
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

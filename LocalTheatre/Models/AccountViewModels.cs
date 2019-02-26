@@ -3,9 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LocalTheatre.Models
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -13,17 +11,12 @@ namespace LocalTheatre.Models
         public string Email { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -32,9 +25,6 @@ namespace LocalTheatre.Models
         public bool RememberMe { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class VerifyCodeViewModel
     {
         [Required]
@@ -51,9 +41,7 @@ namespace LocalTheatre.Models
         public bool RememberMe { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class ForgotViewModel
     {
         [Required]
@@ -61,9 +49,7 @@ namespace LocalTheatre.Models
         public string Email { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class LoginViewModel
     {
         [Required]
@@ -80,9 +66,7 @@ namespace LocalTheatre.Models
         public bool RememberMe { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class RegisterViewModel
     {
         [Required]
@@ -113,9 +97,7 @@ namespace LocalTheatre.Models
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class ResetPasswordViewModel
     {
         [Required]
@@ -137,9 +119,7 @@ namespace LocalTheatre.Models
         public string Code { get; set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class ForgotPasswordViewModel
     {
         [Required]
