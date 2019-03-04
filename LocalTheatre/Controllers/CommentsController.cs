@@ -69,6 +69,8 @@ namespace LocalTheatre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CommentId,CommentBody,CommentDate,CommentAuthor,AnnouncementId")] Comments comments)
         {
+            comments.CommentAuthor = User.Identity.Name;
+
             if (ModelState.IsValid)
             { 
                 db.Comments.Add(comments);
